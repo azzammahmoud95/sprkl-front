@@ -12,6 +12,8 @@ export const getAllUsers = (query) => async (dispatch) => {
             {},
             {
                 search: query?.search,
+                sortType:query?.sortName,
+                sortOrder:query?.sortType
             },
             
         )

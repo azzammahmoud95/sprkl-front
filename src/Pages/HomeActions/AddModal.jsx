@@ -1,34 +1,26 @@
 import React, { useEffect, useState } from "react";
-import Button from "./Button";
-import Label from "./Label";
-import Input from "./Input";
-import DropDown from "./DropDown";
-import Textarea from "./Textarea";
-import Popup from "./Popup";
+import Button from "../../Components/Button";
+import Label from "../../Components/Label";
+import Input from "../../Components/Input";
+import DropDown from "../../Components/DropDown";
+import Textarea from "../../Components/Textarea";
+import Popup from "../../Components/Popup";
 import { useDispatch, useSelector } from "react-redux";
-import { addUser, editUser } from "../Redux/Users/UsersActions";
-import Error from "./Error";
+import { addUser } from "../../Redux/Users/UsersActions";
+import Error from "../../Components/Error";
 
-function EditModal({ data }) {
+function AddModal() {
     const dispatch = useDispatch();
-
     const [openModal, setOpenModal] = useState(false);
     const [formData, setFormData] = useState({
         name: "",
         email: "",
+        password: "",
     });
 
-    useEffect(() => {
-        if (data) {
-            setFormData({
-                email: data?.email,
-                name: data?.name,
-            });
-        }
-    }, [data]);
     const handleSubmit = (event) => {
         event.preventDefault();
-        dispatch(editUser(data?.id, formData));
+        dispatch(addUser(formData));
     };
 
     const {
@@ -40,13 +32,13 @@ function EditModal({ data }) {
         addUserError,
         addUserSuccess,
         editUserSuccess,
-        editUserError,
+
         // deleteUserLoading,
         deleteUserSuccess,
         // deleteUserError,
     } = useSelector((store) => store.usersReducer);
     useEffect(() => {
-        if (deleteUserSuccess || addUserSuccess || editUserSuccess) {
+        if (deleteUserSuccess|| addUserSuccess|| editUserSuccess) {
             setOpenModal(false);
         }
     }, [deleteUserSuccess, addUserSuccess, editUserSuccess]);
@@ -55,7 +47,7 @@ function EditModal({ data }) {
         <>
             {/* Modal toggle */}
             <Button onClick={() => setOpenModal(true)} type="button">
-                Edit
+                Add User
             </Button>
 
             {/* Main modal */}
@@ -63,7 +55,7 @@ function EditModal({ data }) {
                 <Popup
                     setShowPopup={() => setOpenModal(false)}
                     showPopup={openModal}
-                    title="Edit User"
+                    title="Create new User"
                 >
                     <form
                         onSubmit={handleSubmit}
@@ -88,10 +80,10 @@ function EditModal({ data }) {
                                         }
                                     />
                                 </div>
-                                <div className="col-span-4">
+                                <div className="col-span-2 w-full">
                                     <Label>Email</Label>
                                     <Input
-                                        type="text"
+                                        type="email"
                                         name="name"
                                         placeholder="User name"
                                         required
@@ -104,9 +96,30 @@ function EditModal({ data }) {
                                         }
                                     />
                                 </div>
+                                <div className="col-span-2">
+                                    <Label children={"Password"} />
+                                    <Input
+                                        type="password"
+                                        name="name"
+                                        placeholder="User name"
+                                        required
+                                        value={formData.password}
+                                        onChange={(e) =>
+                                            setFormData({
+                                                ...formData,
+                                                password: e.target.value,
+                                            })
+                                        }
+                                    />
+                                </div>
                             </div>
-                            {editUserError && <Error>{editUserError}</Error>}
-                            <Button type="submit">Edit User</Button>
+                            {addUserError && <Error>{addUserError}</Error>}
+                            <Button
+                                type="submit"
+                                //   className="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                            >
+                                Add new User
+                            </Button>
                         </div>
                     </form>
                 </Popup>
@@ -115,4 +128,4 @@ function EditModal({ data }) {
     );
 }
 
-export default EditModal;
+export default AddModal;

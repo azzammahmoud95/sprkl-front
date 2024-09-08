@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Modal from "../AddModal";
+import Modal from "../../Pages/HomeActions/AddModal";
 import { getAllUsers } from "../../Redux/Users/UsersActions";
 import { useDispatch } from "react-redux";
-import AddModal from "../AddModal";
+import AddModal from "../../Pages/HomeActions/AddModal";
 
 export default function Header() {
     const [counter, setCounter] = useState(0);

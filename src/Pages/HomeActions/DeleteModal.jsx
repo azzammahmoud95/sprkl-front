@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Popup from "./Popup";
+import Popup from "../../Components/Popup";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteUser } from "../Redux/Users/UsersActions";
-import Error from "./Error";
+import { deleteUser } from "../../Redux/Users/UsersActions";
+import Error from "../../Components/Error";
 
 export default function DeleteModal({ data }) {
     const dispatch = useDispatch();
