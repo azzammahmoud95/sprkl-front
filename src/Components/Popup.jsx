@@ -32,11 +32,11 @@ export default function Popup({
             id="crud-modal"
             tabIndex={-1}
             aria-hidden="true"
-            className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-gray-900 bg-opacity-50"
+            className="fixed inset-0 z-50 flex items-center  justify-center overflow-y-auto bg-gray-900 bg-opacity-50"
         >
             <div
                 ref={modalRef}
-                className={`relative bg-white rounded-lg shadow dark:bg-gray-700 ${width}`}
+                className={`relative w-1/2 bg-white rounded-lg shadow dark:bg-gray-700 ${width}`}
             >
                 {/* Modal Header */}
                 <div className="flex items-center justify-between p-4 border-b rounded-t dark:border-gray-600">

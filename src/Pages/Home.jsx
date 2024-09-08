@@ -6,9 +6,12 @@ import Table from "../Components/TableComponent/Table";
 import TableHeader from "../Components/TableComponent/TableHeader";
 import Row from "../Components/TableComponent/Row";
 import TableBody from "../Components/TableComponent/TableBody";
+import EditModal from "../Components/EditModal";
+import DeleteModal from "../Components/DeleteModal";
 
 export default function Home() {
     const [counter, setCounter] = useState(0);
+
     const [filter, setFilter] = useState({
         limit: 10,
         offset: 0,
@@ -51,6 +54,14 @@ export default function Home() {
         deleteUserSuccess,
         deleteUserError,
     } = useSelector((store) => store.usersReducer);
+
+    useEffect(() => {
+      if (deleteUserSuccess || addUserSuccess ||editUserSuccess) {
+        dispatch(getAllUsers(filter));
+
+      }
+    }, [deleteUserSuccess,addUserSuccess,editUserSuccess])
+    
     return (
         <Layout>
             <Table>
@@ -80,9 +91,9 @@ export default function Home() {
                                     ).toLocaleDateString()}
                                 </td>
                                 <td>
-                                    <div className="action_btns">
-                                        <button>Edit</button>
-                                        <button>Delete</button>
+                                    <div className="flex p-0.5 gap-2">
+                                        <EditModal data={user}/>
+                                        <DeleteModal data={user}/>
                                     </div>
                                 </td>
                             </Row>

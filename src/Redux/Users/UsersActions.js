@@ -28,7 +28,7 @@ export const getAllUsers = (query) => async (dispatch) => {
 export const addUser = (body) => async (dispatch) => {
     dispatch(usersActions.addUserRequest());
     dispatch(
-        axiosReq("post", process.env.REACT_APP_API + "/user/addf", {}, body, {})
+        axiosReq("post", process.env.REACT_APP_API + "/user/add", {}, body, {})
     ).then((res ) => {
         if (res?.success) {
             dispatch(usersActions.addUserSuccess());
@@ -44,7 +44,7 @@ export const editUser =
         dispatch(usersActions.editUserRequest());
         dispatch(
             axiosReq(
-                "put",
+                "patch",
                 `${process.env.REACT_APP_API}/user/${id}`,
                 {},
                 body,

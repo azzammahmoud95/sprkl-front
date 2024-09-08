@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Modal from "../AddModal";
 import { getAllUsers } from "../../Redux/Users/UsersActions";
 import { useDispatch } from "react-redux";
+import AddModal from "../AddModal";
 
 export default function Header() {
     const [counter, setCounter] = useState(0);
@@ -30,7 +31,7 @@ export default function Header() {
         }
     }, [filter]);
     return (
-        <div className="flex justify-between items-center p-1 bg-gray-700">
+        <div className="flex justify-between items-center p-1 bg-gray-700 border-b-[0.2rem] border-blue-700">
             <div className="text-lg font-bold text-blue-100 p-2 rounded-md">
                 LOGO
             </div>
@@ -70,7 +71,7 @@ export default function Header() {
                     />
                 </div>
             </div>
-            <Modal />
+            <AddModal />
         </div>
     );
 }
